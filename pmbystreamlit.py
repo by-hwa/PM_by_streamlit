@@ -102,19 +102,25 @@ data_load_state = st.text('Loading data')
 data = get_data()
 data_load_state.text("Done! (using st.cache)")
 
+## 오늘의 미세먼지
 
-st.subheader("Today's pm10 Value")
-st.info("{}".format(data["pm10Value"].iloc[-1]))
 
-st.subheader("Today's pm25 Value")
-st.warning("{}".format(data["pm25Value"].iloc[-1]))
+col1, col2 = st.columns(2)
 
-st.subheader("Today's pm10 24avg Value")
-st.success("{}".format(data["pm10Value24"].iloc[-1]))
+with col1:
+    st.subheader("Today's pm10 Value")
+    st.info("{}".format(data["pm10Value"].iloc[-1]))
+    
+    st.subheader("Today's pm25 Value")
+    st.warning("{}".format(data["pm25Value"].iloc[-1]))
+    
 
-st.subheader("Today's pm25 24avg Value")
-st.error("{}".format(data["pm25Value24"].iloc[-1]))
-
+with col2:
+    st.subheader("Today's pm10 24avg Value")
+    st.success("{}".format(data["pm10Value24"].iloc[-1]))
+    
+    st.subheader("Today's pm25 24avg Value")
+    st.error("{}".format(data["pm25Value24"].iloc[-1]))
 
 
 st.subheader("PM Value Now Chart")
