@@ -95,11 +95,16 @@ def get_chart(data):
     return (lines + points + tooltips).interactive()
 
     
+station_list = ['마포구', '종로구']
+
+selected_station = st.selectbox("Select Station", station_list)
+
+
 ## streamlit 구성.
 st.title('Particulate Matter Now')
 
 data_load_state = st.text('Loading data')
-data = get_data()
+data = get_data(station_name=selected_station)
 data_load_state.text("Done! (using st.cache)")
 
 ## 오늘의 미세먼지
