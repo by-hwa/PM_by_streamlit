@@ -37,10 +37,10 @@ def get_data(station_name = '종로구',
     
     env_df = pd.DataFrame(value_list, columns=name_list)
     
-    env_df['pm10Value'] = env_df['pm10Value'].astype('int')
-    env_df['pm25Value'] = env_df['pm25Value'].astype('int')
-    env_df['pm10Value24'] = env_df['pm10Value24'].astype('int')
-    env_df['pm25Value24'] = env_df['pm25Value24'].astype('int')
+    env_df['pm10Value'] = env_df['pm10Value'].replace('-','0').astype('int')
+    env_df['pm25Value'] = env_df['pm25Value'].replace('-','0').astype('int')
+    env_df['pm10Value24'] = env_df['pm10Value24'].replace('-','0').astype('int')
+    env_df['pm25Value24'] = env_df['pm25Value24'].replace('-','0').astype('int')
     
     env_df[['date','time']] = env_df['dataTime'].str.split(expand=True)
     env_df['dataTime'] = (pd.to_datetime(env_df.pop('date'), format='%Y/%m/%d') + 
@@ -94,9 +94,11 @@ def get_chart(data):
     )
     return (lines + points + tooltips).interactive()
 
-    
-station_list = ['마포구', '종로구']
+#%%
+station_list = pd.read_excel('station_list.xls')
+station_list = station_list.iloc[3:,1].tolist()
 
+#%%
 selected_station = st.selectbox("Select Station", station_list)
 
 
@@ -108,7 +110,7 @@ data = get_data(station_name=selected_station)
 data_load_state.text("Done! (using st.cache)")
 
 ## 오늘의 미세먼지
-
+# add_selectbox = st.sidebar.selectbox("왼쪽 사이드바 Select Box", ("A", "B", "C"))
 
 col1, col2 = st.columns(2)
 
