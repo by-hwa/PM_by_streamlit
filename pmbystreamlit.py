@@ -95,8 +95,12 @@ def get_chart(data):
     return (lines + points + tooltips).interactive()
 
 #%%
-station_list = pd.read_excel('./station_list.xls')
-station_list = station_list.iloc[3:,1].tolist()
+# station_list = pd.read_excel('./station_list.xls')
+# station_list = station_list.iloc[3:,1].tolist()
+
+# station_list = station_list.iloc[3:,1]
+# station_list.to_csv('./station_list.csv', index=False)
+station_list = pd.read_csv('./station_list.csv')
 
 #%%
 selected_station = st.selectbox("Select Station", station_list)
