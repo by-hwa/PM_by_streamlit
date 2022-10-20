@@ -95,7 +95,7 @@ def get_chart(data):
     return (lines + points + tooltips).interactive()
 
 #%%
-station_list = pd.read_excel('station_list.xls')
+station_list = pd.read_excel('./station_list.xls')
 station_list = station_list.iloc[3:,1].tolist()
 
 #%%
